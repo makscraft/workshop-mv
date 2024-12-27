@@ -1,114 +1,32 @@
 <?php
 class News extends Model
 {
-	protected $name = "Новости";
+	protected $name = 'News';
 	
-	protected $model_elements = array(
-		array("Активация", "bool", "active", array("on_create" => true)),
-		array("Дата", "date", "date", array("required" => true)),			
-		array("Название", "char", "name", array("required" => true)),
-		array("Ссылка", "url", "url", array("unique" => true, "translit_from" => "name")),
-		array("Изображение", "image", "image"),
-		array("Текст новости", "text", "content", array("rich_text" => true)),
-		array("Заголовок title", "char", "title"),
-		array("Ключевые слова keywords", "text", "keywords"),
-		array("Описание description", "text", "description")
-	);
-	
-	protected $model_display_params = array(
-		"fields_groups" => array("Основные параметры" => array("active", "date", "name", "url", "image", "content"),
-								 "SEO параметры" => array("title", "keywords", "description"))
-	);
-	
-	public function defineNewsPage(Router $router)
-	{
-		$url_parts = $router -> getUrlParts();
-		$record = false;
-		
-		if(isset($url_parts[0]) && $url_parts[0] == "mobile")
-			array_shift($url_parts);
-		
-		if(count($url_parts) == 2)
-			if(is_numeric($url_parts[1]))
-				$record = $this -> findRecord(array("id" => $url_parts[1], "active" => 1));
-			else
-				$record = $this -> findRecord(array("url" => $url_parts[1], "active" => 1));
+	protected $model_elements = [
+		['Active', 'bool', 'active', ['on_create' => true]],
+		['Date', 'date_time', 'date', ['required' => true]],
+		['Name', 'char', 'name', ['required' => true]],
+		['URL', 'url', 'url', ['unique' => true, 'translit_from' => 'name']],
+		['Image', 'image', 'image'],
+		['Content', 'text', 'content', ['rich_text' => true]]
+	];
 
-		return $record;
-	}
-	
-	public function displayOnMain()
-	{
-		$rows = $this -> select(array("active" => 1, "order->desc" => "date", "limit->" => 4));
-		$html = "";
-	
-		foreach($rows as $row)
-		{
-			$url = $this -> root_path."news/".($row['url'] ? $row['url'] : $row['id']);
-				
-			$html .= "<div>\n";
-			$html .= "<a class=\"name\" href=\"".$url."\">".$row['name']."</a>\n";
-			$html .= "<div class=\"date\">".I18n :: formatDate($row['date'])."</div>\n";
-			$html .= "<p>".Service :: cutText($row['content'], 110, " ...")."</p>\n";
-			$html .= "<a class=\"details\" href=\"".$url."\">Подробности</a>\n";
-			$html .= "</div>\n";
-		}
-	
-		return $html;
-	}
-	
-	public function display()
-	{
-		$params = array("active" => 1, "order->desc" => "date", "limit->" => $this -> pager -> getParamsForSelect());
-			
-		$rows = $this -> select($params);
-		$html = "";
-		
-		foreach($rows as $row)
-		{
-			$url = $this -> root_path."news/".($row['url'] ? $row['url'] : $row['id']);
-			
-			$html .= "<div>\n";
-
-			if($row["image"])
-			{
-				$html .= "<div class=\"image\"><a href=\"".$url."\">";	
-				$html .= $this -> cropImage($row["image"], 240, 140);
-				$html .= "</a></div>\n";
-			}
-			
-			$html .= "<div class=\"content\">\n";
-			$html .= "<a class=\"name\" href=\"".$url."\">".$row['name']."</a>\n";
-			$html .= "<div class=\"date\">".I18n :: formatDate($row['date'])."</div>\n";
-						
-			$html .= "<p>".Service :: cutText($row['content'], 130, " ...")."</p>\n";
-			$html .= "<a href=\"".$url."\" class=\"details\">Подробности</a>\n";
-			$html .= "</div>\n</div>\n";
-		}
-				
-		return $html;
-	}
-	
-	public function displayPreviousAndNext($current_id, $current_date)
-	{
-		$html = "";
-		$params = array("active" => 1, "id!=" => $current_id, "date>=" => $current_date, "order->asc" => "date");
-		
-		if($record = $this -> findRecord($params))
-		{
-			$url = $this -> root_path."news/".($record -> url ? $record -> url : $record -> id);					
-			$html .= "<a class=\"previous\" href=\"".$url."\">".$record -> name."</a>\n";
-		}
-		
-		$params = array("active" => 1, "id!=" => $current_id, "date<=" => $current_date, "order->desc" => "date");
-		
-		if($record = $this -> findRecord($params))
-		{
-			$url = $this -> root_path."news/".($record -> url ? $record -> url : $record -> id);
-			$html .= "<a class=\"next\" href=\"".$url."\">".$record -> name."</a>\n";
-		}
-		
-		return $html;
-	}
+	/**
+	 * Installation Process
+	 * 
+	 * 1. Place your model files into the /models/ folder and view files into the /views/ folder.
+	 * 2. Add the model class name to the config/models.php file, e.g., 'News'.
+	 * 3. Define the routes in the config/routes.php file (feel free to customize them):
+	 * 
+	 *    '/news' => 'view-news-all.php',
+	 *    '/news/*' => 'view-news-details.php'
+	 * 
+	 * 4. Run migrations using the Composer CLI or through the Admin Panel (migrations are in 'My Settings' section).
+	 * 5. Access your new module in the Admin Panel and add some content to it.
+	 * 6. Verify the route URLs on the application front.
+	 * 7. Customize the model class and view files to suit your needs.
+	 * 
+	 * P.S. You can use the initial MV build and media/css/intro.css file to check the result.
+ 	*/
 }
-?>
