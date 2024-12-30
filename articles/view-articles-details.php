@@ -1,9 +1,5 @@
 <?php
-$url = $mv -> router -> getUrlPart(1);
-$conditions = is_numeric($url) ? ['id' => $url] : ['url' => $url];
-$conditions['active'] = 1;
-
-$record = $mv -> news -> find($conditions);
+$record = $mv -> articles -> findArticleRecord($mv -> router);
 $mv -> display404($record);
 $mv -> seo -> mergeParams($record, 'name');
 
@@ -17,6 +13,9 @@ include $mv -> views_path.'main-header.php';
 		<section class="content editable">
 			<?php echo $record -> content; ?>
 		</section>
+        <div class="previous-next">
+            <?php echo $mv -> articles -> displayPreviousAndNext($record); ?>
+        </div>
     </section>
 </main>
 <?php
