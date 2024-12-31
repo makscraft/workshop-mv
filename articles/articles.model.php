@@ -42,12 +42,12 @@ class Articles extends Model
 
 	public function display(): string
 	{
-		$params = ['active' => 1, 'order->asc' => 'position'];
+		$conditions = ['active' => 1, 'order->asc' => 'position'];
 		
 		if(isset($this -> paginator))
-			$params['limit->'] = $this -> pager -> getParamsForSelect();
+			$conditions['limit->'] = $this -> paginator -> getParamsForSelect();
 					
-		$rows = $this -> select($params);
+		$rows = $this -> select($conditions);
 		$html = '';
 		
 		foreach($rows as $row)
