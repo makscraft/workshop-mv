@@ -22,7 +22,7 @@ class Options extends ModelSimple
 		['Simple gallery', 'multi_images', 'simple_gallery']
 	];
 
-	/**
+	/*
 	 * Installation Process
 	 * 
 	 * 0. It's a simple model, storing key/value pairs in database table.

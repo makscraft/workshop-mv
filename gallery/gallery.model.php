@@ -12,7 +12,7 @@ class Gallery extends Model
 		['Images', 'multi_images', 'images']
 	];
 
-	/**
+	/*
 	 * Installation Process
 	 * 
 	 * 1. Place your model files into the /models/ folder and view files into the /views/ folder.

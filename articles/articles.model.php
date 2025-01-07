@@ -13,7 +13,7 @@ class Articles extends Model
 		['Content', 'text', 'content', ['rich_text' => true]]
 	];
 
-	/**
+	/*
 	 * Installation Process
 	 * 
 	 * 1. Place your model files into the /models/ folder and view files into the /views/ folder.

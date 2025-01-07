@@ -12,7 +12,7 @@ class Banners extends Model
 		['Content', 'text', 'content', ['rich_text' => true]]
 	];
 
-	/**
+	/*
 	 * Installation Process
 	 * 
 	 * 1. Place your model files into the /models/ folder and view files into the /views/ folder.
@@ -28,31 +28,4 @@ class Banners extends Model
 	 * 
 	 * P.S. You can use the initial MV build and media/css/intro.css file to check the result.
  	*/
-   
-   public function display()
-   {
-   		$rows = $this -> select(["active" => 1, "order->asc" => "order"]);
-   		$html = "";
-   		
-   		foreach($rows as $row) 
-   		{
-   			$html .= "<div class=\"swiper-slide\">\n";
-   			   			
-			$html .= "<div class=\"content\">\n";
-			$html .= "<div class=\"name\">".$row["name"]."</div>\n";
-			$html .= "<p>\n".nl2br($row["content"])."</p>\n";
-
-			if($row["url"])
-				$html .= "<a class=\"green-button\" href=\"".$row["url"]."\">Подробнее</a>\n";
-
-			$html .= "</div>\n";
-			$html .= "<div class=\"image\">\n";
-   			$html .= $this -> cropImage($row["image"], 930, 550, ['alt-text' => $row["name"]]);
-			$html .= "</div>\n";
-   			$html .= "</div>\n";
-   		}
-   		
-   		return $html;
-   }
 }
-?>
