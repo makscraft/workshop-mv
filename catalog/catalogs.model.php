@@ -12,7 +12,7 @@ class Catalogs extends Model
 		['Parent section', 'parent', 'parent', ['parent_for' => 'Products']],
 		['Image', 'image', 'image'],
 		['Position', 'order', 'position'], 
-		['Описание', 'text', 'content', ['rich_text' => true]]
+		['Description', 'text', 'content', ['rich_text' => true]]
 	];
 
 	/*
@@ -36,7 +36,7 @@ class Catalogs extends Model
 
 	public function defineCatalogPage(Router $router): ?Record
 	{
-		$url = $router -> getUrlPart(1);		
+		$url = $router -> getUrlPart(1);
 		$conditions = ['active' => 1];
 		$conditions = is_numeric($url) ? ['id' => $url] : ['url' => $url];
 		$record = $this -> find($conditions);
@@ -69,10 +69,8 @@ class Catalogs extends Model
 		return $html;
 	}
 	
-	public function displayCatalogTreeMenu(?Record $active = null): string
+	public function displayCatalogTreeMenu(int $parent, ?Record $active = null): string
 	{
-		$parent = is_null($active) ? -1 : $active -> id;
-
 		$conditions = [
 			'active' => 1,
 			'parent' => $parent,
@@ -99,7 +97,7 @@ class Catalogs extends Model
 				$css_classes[] = 'active';
 
 			$css_classes = count($css_classes) ? ' class="'.implode(' ', $css_classes).'"' : '';
-			$html .= "<li".$css_classes."><a href=\"".$url."\">".$row['name']."</a></li>\n";
+			$html .= "<li".$css_classes."><a href=\"".$url."\">".$row['name']."</a>\n";
 			
 			if($children && $open)
 				$html .= "<ul>\n".$this -> displayCatalogTreeMenu($row['id'])."</ul>\n";
@@ -127,7 +125,7 @@ class Catalogs extends Model
 			
 			$html .= "<div>\n<a href=\"".$url."\">\n";
             $html .= $this -> cropImage($row['image'], 300, 225, ['alt-text' => $row['name']]);
-			$html .= "<span>".$row['name']."</span>";
+			$html .= "<div class=\"name\">".$row['name']."</div>";
 			$html .= "</a>\n</div>\n";
         }
         
