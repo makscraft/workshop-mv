@@ -1,4 +1,4 @@
-<?php
+<?php 
 class Faq extends Model
 {
 	protected $name = 'FAQ';
@@ -31,24 +31,25 @@ class Faq extends Model
 	public function display()
 	{
 		$conditions = [
-			'active' => 1,
+			'active' => 1, 
 			'question!=' => '',
 			'answer!=' => '',
 			'order->desc' => 'date'
 		];
 
-		if (isset($this->paginator))
-			$conditions['limit->'] = $this->pager->getParamsForSelect();
-
-		$rows = $this->select($conditions);
+		if(isset($this -> paginator))
+			$conditions['limit->'] = $this -> pager -> getParamsForSelect();
+					
+		$rows = $this -> select($conditions);
 		$html = '';
-
-		foreach ($rows as $row) {
-			$html .= "<div id=\"question-" . $row['id'] . "\">\n";
-			$html .= "<div class=\"question\">" . nl2br($row['question']) . "</div>\n";
-			$html .= "<div class=\"date\">" . I18n::formatDate($row['date']) . "</div>\n";
-			$html .= "<div class=\"answer\">" . nl2br($row['answer']) . "</div>\n";
-			$html .= "</div>\n";
+		      
+	    foreach($rows as $row)
+    	{
+    		$html .= "<div id=\"question-".$row['id']."\">\n";
+    		$html .= "<div class=\"question\">".nl2br($row['question'])."</div>\n";
+			$html .= "<div class=\"date\">".I18n :: formatDate($row['date'])."</div>\n";
+			$html .= "<div class=\"answer\">".nl2br($row['answer'])."</div>\n";
+        	$html .= "</div>\n";
 		}
 
 		return $html;

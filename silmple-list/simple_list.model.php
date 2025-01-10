@@ -2,7 +2,7 @@
 class SimpleList extends Model
 {
 	protected $name = 'Simple list';
-
+	
 	protected $model_elements = [
 		['Active', 'bool', 'active', ['on_create' => true]],
 		['Name', 'char', 'name', ['required' => true]],
@@ -28,12 +28,12 @@ class SimpleList extends Model
 
 	public function display(): string
 	{
-		$rows = $this->select(['active' => 1, 'order->asc' => 'position']);
+        $rows = $this -> select(['active' => 1, 'order->asc' => 'position']);
 		$html = '';
+		
+		foreach($rows as $row)
+            $html .= "<li>".$row['name']."</li>\n";
 
-		foreach ($rows as $row)
-			$html .= "<li>" . $row['name'] . "</li>\n";
-
-		return $html;
-	}
+        return $html;
+    }
 }

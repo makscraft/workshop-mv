@@ -128,7 +128,7 @@ class Catalogs extends Model
 			$html .= "<div class=\"name\">".$row['name']."</div>";
 			$html .= "</a>\n</div>\n";
         }
-        
-        return $html;
+		
+		return $html;
 	}
 }
