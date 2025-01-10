@@ -6,20 +6,20 @@ class Items extends Model
 	protected $model_elements = [
 		['Active', 'bool', 'active', ['on_create' => true]],
 		['Name', 'char', 'name', ['required' => true]],
-		['Color', 'enum', 'color', [
+		['Color', 'enum','color', [
 				'values_list' => [
-                    'blue' => 'Blue',
-                    'red' => 'Red',
-                    'green' => 'Green'
-                ],
+					'blue' => 'Blue',
+					'red' => 'Red',
+					'green' => 'Green'
+				],
 				'required' => true,
-                'empty_value' => 'Select color'
+				'empty_value' => 'Select color'
 			]
 		],
 		['Price', 'int', 'price', ['required' => true, 'positive' => true]]
 	];
 
-    protected $migrations = [
+	protected $migrations = [
 		'add_index' => ['color', 'price', 'active']
 	];
 
