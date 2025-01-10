@@ -127,7 +127,7 @@ class Catalogs extends Model
 			$html .= $this -> cropImage($row['image'], 300, 225, ['alt-text' => $row['name']]);
 			$html .= "<div class=\"name\">".$row['name']."</div>";
 			$html .= "</a>\n</div>\n";
-        }
+		}
 		
 		return $html;
 	}

@@ -28,12 +28,12 @@ class SimpleList extends Model
 
 	public function display(): string
 	{
-        $rows = $this -> select(['active' => 1, 'order->asc' => 'position']);
+		$rows = $this -> select(['active' => 1, 'order->asc' => 'position']);
 		$html = '';
-		
-		foreach($rows as $row)
-            $html .= "<li>".$row['name']."</li>\n";
 
-        return $html;
+		foreach($rows as $row)
+			$html .= "<li>".$row['name']."</li>\n";
+
+		return $html;
     }
 }
