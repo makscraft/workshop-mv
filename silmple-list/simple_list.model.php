@@ -2,7 +2,7 @@
 class SimpleList extends Model
 {
 	protected $name = 'Simple list';
-	
+
 	protected $model_elements = [
 		['Active', 'bool', 'active', ['on_create' => true]],
 		['Name', 'char', 'name', ['required' => true]],
@@ -26,14 +26,14 @@ class SimpleList extends Model
 	 * P.S. You can use the initial MV build and media/css/intro.css file to check the result.
  	*/
 
-    public function display(): string
+	public function display(): string
 	{
-        $rows = $this -> select(['active' => 1, 'order->asc' => 'position']);
+		$rows = $this->select(['active' => 1, 'order->asc' => 'position']);
 		$html = '';
-		
-		foreach($rows as $row)
-            $html .= "<li>".$row['name']."</li>\n";
 
-        return $html;
-    }
+		foreach ($rows as $row)
+			$html .= "<li>" . $row['name'] . "</li>\n";
+
+		return $html;
+	}
 }
