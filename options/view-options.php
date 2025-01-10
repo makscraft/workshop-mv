@@ -22,9 +22,6 @@ include $mv -> views_path.'main-header.php';
 		<section class="items-gallery">
 			<?php echo $mv -> options -> displaySimpleGallery(); ?>
 		</section>
-        <?php if(0): ?>
-
-        <?php endif; ?>
     </section>
 </main>
 <?php

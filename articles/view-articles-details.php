@@ -7,12 +7,12 @@ include $mv -> views_path.'main-header.php';
 ?>
 <main class="workshop">
 	<section class="item-details">
-		<h1><?php echo $record -> name; ?></h1>
+        <h1><?php echo $record -> name; ?></h1>
         <div class="date"><?php echo I18n::formatDate($record -> date); ?></div>
         <?php echo $record -> resizeImage('image', 640, 480); ?>
-		<section class="content editable">
-			<?php echo $record -> content; ?>
-		</section>
+        <section class="content editable">
+            <?php echo $record -> content; ?>
+        </section>
         <div class="previous-next">
             <?php echo $mv -> articles -> displayPreviousAndNext($record); ?>
         </div>
