@@ -21,7 +21,7 @@ include $mv -> views_path.'main-header.php';
         </section>
         <section class="right">
             <h1><?php echo $record -> name; ?></h1>
-            <section class="items-list gallery">
+            <section class="items-list gallery catalog">
                 <?php
                     if($has_products)
                         echo $mv -> products -> display(['catalog' => $record -> id]);

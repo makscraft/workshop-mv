@@ -6,7 +6,7 @@ class Products extends Model
 	protected $model_elements = [
 		['Active', 'bool', 'active', ['on_create' => true]],
 		['Name', 'char', 'name', ['required' => true]],
-		['URL', 'url', 'url', ['unique' => true, 'translit_from' => 'name']],         
+		['URL', 'url', 'url', ['unique' => true, 'translit_from' => 'name']],
 		['Catalog section', 'enum', 'catalog', [
 				'foreign_key' => 'Catalogs',
 				'required' => true,

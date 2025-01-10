@@ -8,7 +8,7 @@ class Catalogs extends Model
 	protected $model_elements = [
 		['Active', 'bool', 'active', ['on_create' => true]],
 		['Name', 'char', 'name', ['required' => true]],
-		['URL', 'url', 'url', ['unique' => true, 'translit_from' => 'name']],         
+		['URL', 'url', 'url', ['unique' => true, 'translit_from' => 'name']],
 		['Parent section', 'parent', 'parent', ['parent_for' => 'Products']],
 		['Image', 'image', 'image'],
 		['Position', 'order', 'position'], 
