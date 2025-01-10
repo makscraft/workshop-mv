@@ -1,9 +1,9 @@
 <?php
 class Banners extends Model
 {
-   protected $name = 'Banners';
-   
-   protected $model_elements = [
+	protected $name = 'Banners';
+
+	protected $model_elements = [
 		['Active', 'bool', 'active', ['on_create' => true]],
 		['Name', 'char', 'name', ['required' => true]],
 		['URL', 'url', 'url'],

@@ -124,7 +124,7 @@ class Catalogs extends Model
 			$url = $this -> root_path.'catalog/'.($row['url'] ? $row['url'] : $row['id']);
 			
 			$html .= "<div>\n<a href=\"".$url."\">\n";
-            $html .= $this -> cropImage($row['image'], 300, 225, ['alt-text' => $row['name']]);
+			$html .= $this -> cropImage($row['image'], 300, 225, ['alt-text' => $row['name']]);
 			$html .= "<div class=\"name\">".$row['name']."</div>";
 			$html .= "</a>\n</div>\n";
         }
