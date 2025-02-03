@@ -1,12 +1,12 @@
 <?php
-$mv -> seo -> mergeParams('SimpleList');
+$mv -> seo -> mergeParams('Simple List');
 
 include $mv -> views_path.'main-header.php';
 ?>
 <main class="workshop">
 	<section>
 		<h1>SimpleList</h1>
-            <section class="item-details">
+		<section class="item-details">
             <ul>
                 <?php echo $mv -> SimpleList -> display(); ?>
             </ul>
